@@ -54,11 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandNames.cs" />
-    <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\SQLiteItemRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

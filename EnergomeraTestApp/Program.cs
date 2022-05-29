@@ -10,9 +10,34 @@ namespace EnergomeraTestApp
     {
         static void Main(string[] args)
         {
+            WriteReference();
+            while (true)
+            {
+                var commands = Console.ReadLine().Split();
+                if (commands.Length == 0)
+                {
+                    Console.WriteLine("Отсутствуют комманды");
+                    return;
+                }
+                switch (commands[0])
+                {
+                    case CommandNames.AddItemCommand:                       
+                    case CommandNames.GetItemsCommand:
+                    case CommandNames.EditItemCommand:
+                    case CommandNames.DeleteItemCommand:
+                    default:
+                        Console.WriteLine("Неверное имя команды");
+                        return;
+                }
+            }
+        }
+        /// <summary>
+        /// Выводит справку на экран
+        /// </summary>
+        public static void WriteReference()
+        {
 
         }
-
         /// <summary>
         /// Определяет правильность фигурных скобок
         /// </summary>
@@ -50,11 +75,11 @@ namespace EnergomeraTestApp
         /// <summary>
         /// Расставялет символы на клавиатуре в правильном порядке
         /// </summary>
-        /// <param name="s1"></param>
-        /// <param name="s2"></param>
+        /// <param name="s1">Образец строки</param>
+        /// <param name="s2">Строка с неправильными символами</param>
         public static void FixKeyboard(string s1, string s2)
         {
-            if(s1 == s2)
+            if (s1 == s2)
             {
                 Console.WriteLine("0");
                 return;
