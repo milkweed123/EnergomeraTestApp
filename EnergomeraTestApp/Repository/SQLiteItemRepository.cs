@@ -28,14 +28,19 @@ namespace EnergomeraTestApp.Repository
             return _db.Items.Find(id);
         }
 
-        public void Create(Item book)
+        public void Create(string name)
         {
-            _db.Items.Add(book);
+            Item item = new Item() { Name = name};
+            _db.Items.Add(item);
         }
 
-        public void Update(Item book)
+        public bool Update(int id,string name)
         {
-            _db.Entry(book).State = EntityState.Modified;
+           var item= _db.Items.Find(id);
+            if (item == null)
+                return false;
+           item.Name = name;
+            return true;
         }
 
         public void Delete(int id)

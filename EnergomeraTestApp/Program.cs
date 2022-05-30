@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnergomeraTestApp.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace EnergomeraTestApp
         static void Main(string[] args)
         {
             WriteReference();
+            ICommand command = null;
             while (true)
             {
                 var commands = Console.ReadLine().Split();
@@ -21,14 +23,47 @@ namespace EnergomeraTestApp
                 }
                 switch (commands[0])
                 {
-                    case CommandNames.AddItemCommand:                       
+                    case CommandNames.AddItemCommand:
+                        if (commands.Length < 2)
+                        {
+                            Console.WriteLine("Отсутствует параметр name у команды -additem");
+                            continue;
+                        }
+                        else
+                        {
+                            command = new AddCommand(commands[1]);
+                        }
+                        break;
                     case CommandNames.GetItemsCommand:
+                        command = new GetCommand();
+                        break;
                     case CommandNames.EditItemCommand:
+                        if (commands.Length < 3 || !int.TryParse(commands[1], out _))
+                        {
+                            Console.WriteLine("Неверные  параметры  у команды -getitem");
+                            continue;
+                        }
+                        else
+                        {
+                            command = new EditCommand(Convert.ToInt32(commands[1]), commands[2]);
+                        }
+                        break;
                     case CommandNames.DeleteItemCommand:
+                        if (commands.Length < 2 || !int.TryParse(commands[1], out _))
+                        {
+                            Console.WriteLine("Неверные  параметры  у команды -deleteitem");
+                            continue;
+                        }
+                        else
+                        {
+                            command = new DeleteCommand(Convert.ToInt32(commands[1]));
+                        }
+                        break;
                     default:
                         Console.WriteLine("Неверное имя команды");
-                        return;
+                        continue;
                 }
+                command.Execute();
             }
         }
         /// <summary>

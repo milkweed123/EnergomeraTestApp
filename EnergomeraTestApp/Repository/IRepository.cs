@@ -11,8 +11,8 @@ namespace EnergomeraTestApp.Repository
     {
         IEnumerable<Item> GetItemsList();
         Item GetItem(int id);
-        void Create(Item item);
-        void Update(Item item);
+        void Create(string name);
+        bool Update(int id, string name);
         void Delete(int id);
         void Save();
     }

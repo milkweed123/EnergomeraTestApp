@@ -54,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandNames.cs" />
+    <Compile Include="Commands\DeleteCommand.cs" />
+    <Compile Include="Commands\GetCommand.cs" />
+    <Compile Include="Commands\EditCommand.cs" />
+    <Compile Include="Commands\AddCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Program.cs" />
