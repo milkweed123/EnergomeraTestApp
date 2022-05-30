@@ -14,7 +14,7 @@ namespace EnergomeraTestApp.Data
 
         public ApplicationDbContext() : base("DefaultConnection")
         {
-
+            var ensureDLLIsCopied =  System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     }
 }

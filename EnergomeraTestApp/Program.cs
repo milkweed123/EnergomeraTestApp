@@ -1,4 +1,5 @@
 ﻿using EnergomeraTestApp.Commands;
+using EnergomeraTestApp.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace EnergomeraTestApp
         static void Main(string[] args)
         {
             WriteReference();
-            ICommand command = null;
+            CreateTable();
+            ICommand command;
             while (true)
             {
                 var commands = Console.ReadLine().Split();
@@ -71,7 +73,14 @@ namespace EnergomeraTestApp
         /// </summary>
         public static void WriteReference()
         {
-
+            Console.WriteLine("Для получения списка всех предметов введите : ");
+            Console.WriteLine(CommandNames.GetItemsCommand);
+            Console.WriteLine("Для добавления предмета в список всех предметов введите : ");
+            Console.WriteLine(CommandNames.AddItemCommand + " " + "-name (например:"+CommandNames.AddItemCommand+ " ручка)" );
+            Console.WriteLine("Для удаления предмета из списка всех предметов введите : ");
+            Console.WriteLine(CommandNames.DeleteItemCommand + " " + "-id (например:" + CommandNames.DeleteItemCommand+ " 1)");
+            Console.WriteLine("Для редактирования предмета в списке всех предметов введите : ");
+            Console.WriteLine(CommandNames.EditItemCommand + " " + "-id -newname (например:" + CommandNames.EditItemCommand + " 1 НоваяРучка)");
         }
         /// <summary>
         /// Определяет правильность фигурных скобок
@@ -154,6 +163,15 @@ namespace EnergomeraTestApp
                 Console.WriteLine(item.Key.ToString() + " " + item.Value.ToString());
             }
 
+        }
+
+        public static void CreateTable()
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                db.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS 'Items' ( 'Id' INTEGER, 'Name' TEXT, PRIMARY KEY('Id') )");
+                db.SaveChanges();
+            }
         }
     }
 }

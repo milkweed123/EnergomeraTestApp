@@ -18,9 +18,16 @@ namespace EnergomeraTestApp.Commands
         {
             using (SQLiteItemRepository repository = new SQLiteItemRepository())
             {
-                repository.Delete(_id);
-                repository.Save();
-                Console.WriteLine("Предмет добавлен");
+                if (repository.Delete(_id))
+                {
+                    Console.WriteLine("Предмет удален");
+                    repository.Save();
+                }
+                else
+                {
+                    Console.WriteLine("Предмет с таким идентификатором отсутствует");
+                    return;
+                }
             }
         }
     }

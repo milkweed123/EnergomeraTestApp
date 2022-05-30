@@ -20,7 +20,7 @@ namespace EnergomeraTestApp.Repository
 
         public IEnumerable<Item> GetItemsList()
         {
-            return _db.Items;
+             return _db.Items;
         }
 
         public Item GetItem(int id)
@@ -43,11 +43,15 @@ namespace EnergomeraTestApp.Repository
             return true;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             Item book = _db.Items.Find(id);
             if (book != null)
+            {
                 _db.Items.Remove(book);
+                return true;
+            }
+            return false;   
         }
 
         public void Save()

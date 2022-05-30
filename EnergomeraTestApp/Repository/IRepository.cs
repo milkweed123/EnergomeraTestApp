@@ -13,7 +13,7 @@ namespace EnergomeraTestApp.Repository
         Item GetItem(int id);
         void Create(string name);
         bool Update(int id, string name);
-        void Delete(int id);
+        bool Delete(int id);
         void Save();
     }
 }
